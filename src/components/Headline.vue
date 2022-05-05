@@ -2,9 +2,8 @@
   <div class="container">
     <h1>
       <span>My ToDo APP</span><br/>
-      EveryDay <br />
-      ToDo Works <br />
-      ToDo Learning <br/>
+      EveryDay 
+      ToDo List <br />
     </h1>
     <p>
       이름을 작성하고, 매일 매일 해야할 일들을 작성하고, 계획을 실천해보세요
