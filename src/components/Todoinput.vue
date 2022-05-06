@@ -41,6 +41,7 @@ export default {
     },
     clearInput(){
       this.newTodoItem=""
+      this.$router.go()
     }
   }
 }

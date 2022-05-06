@@ -3,7 +3,7 @@
     <ul class="list">
       <li 
         class="list__item"
-        v-for="todoItem in todoItems"
+        v-for="(todoItem,index) in todoItems"
         v-bind:key="todoItem.item">
         <input 
           type="checkbox"
@@ -46,6 +46,7 @@ export default {
           )
         }
       }
+      
     }
   },
 
@@ -71,6 +72,7 @@ export default {
 .list{
   position: relative;
   margin:2.1rem auto 0;
+  color:$white;
   z-index:9;
 }
 </style>
