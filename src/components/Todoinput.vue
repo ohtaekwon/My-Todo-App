@@ -1,32 +1,43 @@
 <template>
   <div class="container">
-    <div class="inputBox shadow">
+    <div class="add">
       <input 
         type="text"
+        class="add__input"
+        placeholder="Enter your task here"
         v-model="newTodoItem"
-        v-on:keyup.enter="addTodo"/>
-      <span
-        class="addContainer"
-        v-on:click="addTodo">
-        <i class="far fa-plus-square addBtn"></i>
-      </span>
+        v-on:keyup.enter="addTodoItem"/>
+      <button 
+        class="add__button"
+        v-on:click="addTodoItem">
+        <span class="blind">Add</span>
+      </button>
     </div>
   </div>
 </template>
 
 <script>
+import getDate from "~/js/getDate.js";
+
 export default {
   data(){
-    return{
-      newTodoItem:''
-    }
+    return {
+      newTodoItem:""
+    };
   },
   methods:{
-    addTodo(){
-      console.log(this.newTodoItem.value)
-      localStorage.setItem(this.newTodoItem, this.newTodoItem);
-      this.clearInput()
-      this.$router.go()
+    addTodoItem(){
+      if (this.newTodoItem !== ""){
+        const value = {
+          // value값 객체데이터
+          item: this.newTodoItem,
+          date: `${getDate().date} ${getDate().week}`,
+          time: getDate().time,
+          completed:false // 완료여부
+        }
+        localStorage.setItem(this.newTodoItem, JSON.stringify(value))
+        this.clearInput()
+      }
     },
     clearInput(){
       this.newTodoItem=""
@@ -37,43 +48,10 @@ export default {
 
 <style lang="scss" scoped>
 @import "~/scss/main.scss";
-
-.container{
-  padding-top:40px;
+.add {
+  position: relative;
+  margin: 0 auto;
+  
 }
-
-.inputBox {
-  background: white;
-  height: 60px;
-  line-height: 50px;
-  border-radius: 5px;
-  input{
-    border-style: none;
-    font-size: 16px;
-    background-size:cover;
-    width:800px;
-    height: 50px;
-    &:focus{
-     outline: none;
-    }
-  }
-  .addContainer {
-    float: right;
-    background: linear-gradient(to right, #62EAC6, #32CEE6);
-    display: block;
-    width: 5rem;
-    height: 60px;
-    border-radius: 0 5px 5px 0;
-    text-align: center;
-    top:0;
-    bottom:0;
-    left:0;
-    right:0;
-  }
-  .addBtn {
-    color: white;
-    vertical-align: middle;
-  }
-}
-
 </style>
+

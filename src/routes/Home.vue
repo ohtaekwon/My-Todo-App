@@ -23,6 +23,6 @@ export default {
     Login:Login,
     Todoinput:Todoinput,
     TodoList:TodoList
-  }
+  },
 }
 </script>

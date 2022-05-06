@@ -1,82 +1,76 @@
 <template>
   <div class="container">
-    <ul>
+    <ul class="list">
       <li 
-        v-for="(todoItem, index) in todoItems" 
-        v-bind:key="todoItem" 
-        class="shadow">
-        {{ todoItem }}
-        <span 
-          class="removeBtn" 
+        class="list__item"
+        v-for="todoItem in todoItems"
+        v-bind:key="todoItem.item">
+        <input 
+          type="checkbox"
+          v-bind:id="todoItem.item"
+          v-bind:checked="todoItem.completed === true"
+          v-on:change="toggleComplete(todoItem)"/>
+        <label
+          v-bind:for="todoItem.item" 
+          class="list__label">
+            <p class="list__text">{{ todoItem.item }}</p>  
+        </label>
+        <button 
+          class="list__delete" 
           v-on:click="removeTodo(todoItem, index)">
-          <i class="fas fa-trash-alt"></i>
-        </span>
+          <div class="blind">Delete</div>
+        </button>
+        <p class="list__date">{{ todoItem.date }}</p>
       </li>
     </ul>
   </div>
 </template>
+
 <script>
 export default {
-  data: function() {
-    return {
-      todoItems: []
+  // props:["propsdata"],
+  data(){
+    return{
+      todoItems:[]
     }
   },
-  methods: {
-    removeTodo: function(todoItem, index) {
-      localStorage.removeItem(todoItem);
-      this.todoItems.splice(index, 1); //특정 index에서 하나를 지울 수 있음
-    }
-  },
-  created: function() {
-    if (localStorage.length > 0) {
-      for (var i = 0; i < localStorage.length; i ++) {
-        if (localStorage.key(i) !== 'loglevel:webpack-dev-server') {
-          this.todoItems.push(localStorage.key(i));
+  created(){
+    if (localStorage.length>0){
+      for (let i=0; i<localStorage.length; i++){
+        // console.log(localStorage.key())
+        // localStoarge.key(인덱스번호)
+        if (localStorage.key(i) !== "loglevel:webpack-dev-server"){
+          this.todoItems.push(
+            // localStorage.getItem(localStorage.key(i))
+            JSON.parse(localStorage.getItem(localStorage.key(i)))
+          )
         }
       }
     }
+  },
+
+  methods:{
+    toggleComplete(todoItem){
+      todoItem.completed = !todoItem.completed
+      localStorage.setItem(todoItem.item, JSON.stringify(todoItem))
+    },
+    removeTodo(todoItem, index) {
+      localStorage.removeItem(todoItem.item);
+      this.todoItems.splice(index, 1);
+    }
+
   }
 }
 </script>
 
-
 <style lang="scss" scoped>
 @import "~/scss/main.scss";
-
 .container{
   padding-top:40px;
 }
-ul {
-  list-style-type: none;
-  padding-left: 0;
-  margin-top: 0;
-  text-align: left;
-}
-li {
-  display: flex;
-  min-height: 50px;
-  height: 50px;
-  line-height: 50px;
-  margin: 0.5rem 0;
-  padding: 0 0.9rem;
-  background: white;
-  border-radius: 5px;
-}
-.checkBtn {
-  line-height: 45px;
-  color:$gray-600;
-  margin-right: 5px;
-}
-.checkBtnCompleted {
-  color: $white;
-}
-.textCompleted {
-  text-decoration: line-through;
-  color: $white;
-}
-.removeBtn {
-  margin-left: auto;
-  color: #de4343;
+.list{
+  position: relative;
+  margin:2.1rem auto 0;
+  z-index:9;
 }
 </style>

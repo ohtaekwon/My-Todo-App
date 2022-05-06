@@ -35,7 +35,7 @@ export default {
   background-size: cover; // 사진이 화면보다 클 때, 가로 세로 비율을 유지한 채로 작게 조정
   background-repeat: no-repeat;
   background-position: center;
-  z-index:-5;
+  z-index:-9;
   filter: brightness(30%);
   }
 }
