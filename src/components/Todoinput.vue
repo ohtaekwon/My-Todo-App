@@ -37,6 +37,7 @@ export default {
         }
         localStorage.setItem(this.newTodoItem, JSON.stringify(value))
         this.clearInput()
+        this.$router.go()
       }
     },
     clearInput(){
@@ -64,8 +65,15 @@ export default {
     border:none;
     width:500x;
     background-color: rgba(255,255,255,0.1);
+    color:$white;
+    &::placeholder{
+      color:$white;
+    }
     &:hover::-webkit-input-placeholder{
-      color: rgb(50, 50, 50);
+      color: $white;
+    }
+    &:focus{
+      outline: none;
     }
     ::placeholder{
       font-family: 'Oswald', sans-serif;
@@ -74,10 +82,14 @@ export default {
   }
   button{
     border:none;
-    background-color: rgba(255,255,255,0.1);
+    // background-color: rgba(255,255,255,0.1);
     color:$primary;
     margin: 0 auto;
     text-align: center;
+    background: linear-gradient(to right, #6478fb, #8763fb);
+    // display: block;
+    width: 3rem;
+    border-radius: 0 5px 5px 0;
   }
   
 }

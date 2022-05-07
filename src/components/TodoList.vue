@@ -10,13 +10,14 @@
           type="checkbox"
           v-bind:id="todoItem.item"
           v-bind:checked="todoItem.completed === true"
-          v-on:change="toggleComplete(todoItem)"/>
+          v-on:change="toggleComplete(todoItem)"
+          class="checkbox"/>
         <label
           v-bind:for="todoItem.item" 
           class="list__label">
-            <p class="list__text">{{ todoItem.item }}</p>  
+          <p class="list__text">{{ todoItem.item }}</p>  
         </label>
-        <p class="list__date">{{ todoItem.date }}</p>
+          <p class="list__date">{{ todoItem.date }}</p>
         <button 
           class="list__delete" 
           v-on:click="removeTodo(todoItem, index)">
@@ -35,6 +36,7 @@ export default {
       todoItems:[]
     }
   },
+  
   created(){
     if (localStorage.length>0){
       for (var i=0; i<localStorage.length; i++){
@@ -74,17 +76,7 @@ export default {
 .container{
   padding-top:40px;
 }
-// .list{
-//   text-align: center;
-//   margin:0 auto;
-//   padding-top: 20px;
-//   .list__item{
-//     display: flex;
-//     margin:0 auto;
-//     color:$primary;
 
-//   }
-// }
 ul {
   list-style-type: none;
   padding-left: 0;
@@ -96,11 +88,30 @@ li {
   min-height: 50px;
   height: 50px;
   line-height: 50px;
-  margin: 0.5rem 0;
-  padding: 0 0.9rem;
+  margin: 0 auto;
   border-radius: 5px;
   background-color: rgba(255,255,255,0.1);
+  justify-content: center;
+  left:0;
+  right:0;
+  top:0;
+  bottom:0;
+  .checkbox{
+    display: inline-block;
+
+    justify-content: center;
+    align-items:center;
+    vertical-align: middle;
+    width: 50px;
+    height: 50px;
+    border: 2px solid #bcbcbc;
+    cursor: pointer;
+  }
+  
   label{
+    display: inline-block;
+    margin-left:50px;
+    margin-right:100px;
     font-family: 'Oswald', sans-serif;
     color:$primary;
     font-size:50px;
@@ -109,7 +120,6 @@ li {
     font-family: 'Oswald', sans-serif;
     color:$primary;
     font-size:30px;
-    
   }
   .list__delete{
     margin-right:auto;

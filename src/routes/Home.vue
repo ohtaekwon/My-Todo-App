@@ -3,9 +3,10 @@
   <Headline />
   <Clock />
   <Login />
-  <!-- <LoginList /> -->
-  <Todoinput />
-  <TodoList />
+  <div id="todo">
+    <Todoinput />
+    <TodoList />
+  </div>
 </template>
 
 <script>
@@ -15,6 +16,7 @@ import Clock from '~/components/Clock.vue'
 import Login from '~/components/Login.vue'
 import Todoinput from '~/components/Todoinput.vue'
 import TodoList from '~/components/TodoList.vue'
+// import TodoController from '~/components/TodoController.vue'
 
 export default {
   components:{
@@ -23,7 +25,9 @@ export default {
     Clock:Clock,
     Login:Login,
     Todoinput:Todoinput,
-    TodoList:TodoList
+    // TodoController:TodoController,
+    TodoList:TodoList,
+
   },
 }
 </script>

@@ -31,7 +31,8 @@ export default {
     return{
       username:'',
       hidden:false,
-      localName:''
+      hidden2:false,
+      // localName:''
    }
   },
   created(){
@@ -39,7 +40,7 @@ export default {
     console.log(localStorage.username)
     if (localStorage.username!==null){
       this.username = localStorage.username
-      // this.hidden=
+      // this.hidden=!this.hidden
     }
   },
   methods:{
@@ -72,6 +73,9 @@ export default {
 .hidden{
   display: none;
 }
+.hidde2{
+  display: none;
+}
 #login-Form {
   text-align: center;
   margin-top:0px;
@@ -89,6 +93,7 @@ export default {
     margin-bottom:20px;
     margin-top:-50px;
     transition: all, 0.4s;
+    
     &:hover::-webkit-input-placeholder{
       color: rgb(50, 50, 50);
     }
