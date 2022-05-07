@@ -41,7 +41,7 @@ export default {
     },
     clearInput(){
       this.newTodoItem=""
-      this.$router.go()
+      // this.$router.go() // 새로 고침
     }
   }
 }
@@ -49,9 +49,13 @@ export default {
 
 <style lang="scss" scoped>
 @import "~/scss/main.scss";
+.container{
+  padding-top:40px;
+}
 .add {
   position: relative;
   margin: 0 auto;
+  text-align: center;
   
 }
 </style>

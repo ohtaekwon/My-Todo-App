@@ -36,7 +36,7 @@ export default {
   },
   created(){
     if (localStorage.length>0){
-      for (let i=0; i<localStorage.length; i++){
+      for (let i=1; i<localStorage.length; i++){
         // console.log(localStorage.key())
         // localStoarge.key(인덱스번호)
         if (localStorage.key(i) !== "loglevel:webpack-dev-server"){
