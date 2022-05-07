@@ -4,7 +4,7 @@ const path = require('path')
 const HtmlPlugin = require('html-webpack-plugin')
 const CopyPlugin = require('copy-webpack-plugin')
 const {VueLoaderPlugin} = require('vue-loader')
-
+const Webpack = require('webpack');
 // export
 module.exports = {
   resolve:{
@@ -58,6 +58,7 @@ module.exports = {
 
   // 번들링 후 결과물의 처리 방식 등 다양한 플러그인들을 설정
   plugins:[
+
     new HtmlPlugin({
       template:'./index.html'
     }),
@@ -66,7 +67,23 @@ module.exports = {
         {from:'static'}
       ]
     }),
-    new VueLoaderPlugin()
+    new VueLoaderPlugin(),
+
+    new Webpack.DefinePlugin({
+      __VUE_OPTIONS_API__: true, 
+      __VUE_PROD_DEVTOOLS__: true,
+      PRODUCTION: JSON.stringify(true),
+      VERSION: JSON.stringify('5fa3b9'),
+      BROWSER_SUPPORTS_HTML5: true,
+      TWO: '1+1',
+      'typeof window': JSON.stringify('object'),
+      // 'process.env.NODE_ENV': JSON.stringify(process.env.NODE_ENV),
+    })
+    
+    // new Webpack.DefinePlugin({
+    //   __VUE_OPTIONS_API__: true, 
+    //   __VUE_PROD_DEVTOOLS__: true
+    // }), // to remove warn in browser console: runtime-core.esm-bundler.js:3607 Feature flags __VUE_OPTIONS_API__, __VUE_PROD_DEVTOOLS__ are not explicitly defined...
   ],
   devServer:{
     host:'localhost',

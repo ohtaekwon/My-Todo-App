@@ -10,7 +10,7 @@
       <button 
         class="add__button"
         v-on:click="addTodoItem">
-        <span class="blind">Add</span>
+        <span class="blind"><i class="addBtn fa fa-plus"></i></span>
       </button>
     </div>
   </div>
@@ -22,7 +22,7 @@ import getDate from "~/js/getDate.js";
 export default {
   data(){
     return {
-      newTodoItem:""
+      newTodoItem:'',
     };
   },
   methods:{
@@ -56,6 +56,29 @@ export default {
   position: relative;
   margin: 0 auto;
   text-align: center;
+  color:$primary;
+  font-size:2rem;
+  width: 540px;
+  height:40px;
+  input{
+    border:none;
+    width:500x;
+    background-color: rgba(255,255,255,0.1);
+    &:hover::-webkit-input-placeholder{
+      color: rgb(50, 50, 50);
+    }
+    ::placeholder{
+      font-family: 'Oswald', sans-serif;
+      color:$primary;
+    }
+  }
+  button{
+    border:none;
+    background-color: rgba(255,255,255,0.1);
+    color:$primary;
+    margin: 0 auto;
+    text-align: center;
+  }
   
 }
 </style>

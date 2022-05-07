@@ -1,6 +1,7 @@
 <template>
   <div class="container">
-    <ul class="list">
+    <ul 
+      class="list">
       <li 
         class="list__item"
         v-for="(todoItem,index) in todoItems"
@@ -15,12 +16,12 @@
           class="list__label">
             <p class="list__text">{{ todoItem.item }}</p>  
         </label>
+        <p class="list__date">{{ todoItem.date }}</p>
         <button 
           class="list__delete" 
           v-on:click="removeTodo(todoItem, index)">
-          <div class="blind">Delete</div>
+          <div class="blind"><i class="fa fa-trash"></i></div>
         </button>
-        <p class="list__date">{{ todoItem.date }}</p>
       </li>
     </ul>
   </div>
@@ -36,14 +37,18 @@ export default {
   },
   created(){
     if (localStorage.length>0){
-      for (let i=1; i<localStorage.length; i++){
-        // console.log(localStorage.key())
+      for (var i=0; i<localStorage.length; i++){
+        console.log(localStorage.key(i))
         // localStoarge.key(인덱스번호)
-        if (localStorage.key(i) !== "loglevel:webpack-dev-server"){
+        // if (localStorage.key(i) !== "loglevel:webpack-dev-server"){
+        if (localStorage.key(i)==='username'){
+          continue
+        }
+        else{
           this.todoItems.push(
-            // localStorage.getItem(localStorage.key(i))
-            JSON.parse(localStorage.getItem(localStorage.key(i)))
-          )
+          // localStorage.getItem(localStorage.key(i))
+          JSON.parse(localStorage.getItem(localStorage.key(i)))
+        )
         }
       }
       
@@ -69,10 +74,51 @@ export default {
 .container{
   padding-top:40px;
 }
-.list{
-  position: relative;
-  margin:2.1rem auto 0;
-  color:$white;
-  z-index:9;
+// .list{
+//   text-align: center;
+//   margin:0 auto;
+//   padding-top: 20px;
+//   .list__item{
+//     display: flex;
+//     margin:0 auto;
+//     color:$primary;
+
+//   }
+// }
+ul {
+  list-style-type: none;
+  padding-left: 0;
+  margin-top: 0;
+  text-align: left;
+}
+li {
+  display: flex;
+  min-height: 50px;
+  height: 50px;
+  line-height: 50px;
+  margin: 0.5rem 0;
+  padding: 0 0.9rem;
+  border-radius: 5px;
+  background-color: rgba(255,255,255,0.1);
+  label{
+    font-family: 'Oswald', sans-serif;
+    color:$primary;
+    font-size:50px;
+  }
+  p{
+    font-family: 'Oswald', sans-serif;
+    color:$primary;
+    font-size:30px;
+    
+  }
+  .list__delete{
+    margin-right:auto;
+    border:none;
+    font-size:30px;
+    color:$red;
+    background:none;
+    cursor: pointer;
+  }
+  
 }
 </style>

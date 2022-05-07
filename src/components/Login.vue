@@ -7,17 +7,21 @@
         required maxlength="11" 
         type="text" 
         placeholder="What is your name?"
+        class="inputname"
         v-model="username"
         v-on:keyup.enter="onLoginSubmit"/>
       <input 
         type="submit" 
         value="Log In" 
+        class="loginbtn"
         v-on:click="onLoginSubmit"/>
     </form>
     
-    <h1 
-    :class="{hidden:!hidden}"
-    id="greeting"></h1>
+    <h1
+      :class="{hidden:!hidden}"
+      id="greeting">
+      Hello {{ username }}
+    </h1>
   </div>
 </template>
 
@@ -27,38 +31,34 @@ export default {
     return{
       username:'',
       hidden:false,
+      localName:''
    }
+  },
+  created(){
+    console.log(this.username)
+    console.log(localStorage.username)
+    if (localStorage.username!==null){
+      this.username = localStorage.username
+      // this.hidden=
+    }
   },
   methods:{
     onLoginSubmit(info){
       if (this.username!=""){
         const loginFormEl=document.querySelector('#login-Form')
         const loginInput = loginFormEl.querySelector('input')
-        const greeting = document.querySelector('#greeting')
+        // const greeting = document.querySelector('#greeting')
         const HIDDEN_CLASSNAME = 'hidden'
         const USERNAME_KEY = 'username'
-        // 새로 고침을 막음
-        // 1) 브라우저의 기본 동작을 막음
         info.preventDefault()
-        // 2) form을 다시 숨겨준다.
-        loginFormEl.classList.add(HIDDEN_CLASSNAME)
-        // 3) loginInput.value를 username이라는 변수에 저장한다.
         const username = loginInput.value
 
         // localStorage
-        // 4) username 값을 username 이라는 key와 함께 local stroage에 저장한다.
         localStorage.setItem(USERNAME_KEY,this.username)
-        // 5) paintGeetings 함수를 호출한다.
-        // paintGeetings 는 하나의 인자를 받고 있다.
-        this.paintGreetings(username)
         this.hidden=!this.hidden
       }
     },
-    paintGreetings(username){
-      document.querySelector('#greeting').innerText = `Hello ${username}`
-      // greeting.innerText = `Hello ${username}`
-      document.querySelector('#greeting').classList.remove(this.HIDDEN_CLASSNAME)
-    },
+
   }
 }
 </script>
@@ -67,28 +67,64 @@ export default {
 @import "~/scss/main.scss";
 
 .container{
-  padding-top:400px; // 내부 위쪽 여백 40px
+  padding-top:300px; // 내부 위쪽 여백 40px
 }
 .hidden{
   display: none;
 }
 #login-Form {
   text-align: center;
-  color:white;
-  margin:0 auto;
-  width: 600px;
-  background-color: rgba(255,255,255,0.2);
-  border:none;
-  transition: all, 0.4s;
+  margin-top:0px;
+  padding-top: 20px;
+
+  input{
+    text-align: center;
+    color:$primary;
+    font-size:2rem;
+    width: 540px;
+    height:40px;
+    background-color: rgba(255,255,255,0.1);
+    font-weight: 500;
+    border:none;
+    margin-bottom:20px;
+    margin-top:-50px;
+    transition: all, 0.4s;
+    &:hover::-webkit-input-placeholder{
+      color: rgb(50, 50, 50);
+    }
+    ::placeholder{
+      font-family: 'Oswald', sans-serif;
+      color:$primary;
+    }
+    &:first-child{
+      text-align: center;
+      color:white;
+      font-size:1.3rem;
+      padding: 10px;
+      width: 240px;
+      background-color: rgba(255,255,255,0.2);
+      border:none;
+      transition: all, 0.4s;
+      &:hover{
+        background-color: rgba(255,255,255,0.4);
+
+      }
+    }
+  }
+  .loginbtn{
+    display: none;
+  }
 }
 
 
 #greeting{
   margin: 0 auto;
   text-align: center;
-  color: white;
-  font-weight: 400;
-  font-size:2rem;
-  font-weight: 600;
+  color:$gray-200;
+  font-family: 'Oswald', sans-serif;
+  font-size:3rem;
+  line-height: 1;// 줄 높이
+ 
+
 }
 </style>
