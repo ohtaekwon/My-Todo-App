@@ -1,3 +1,3 @@
 <template>
-  <h1>Plan!</h1>
+  <h1>제작중입니다!</h1>
 </template>

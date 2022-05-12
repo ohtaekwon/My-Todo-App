@@ -1,4 +1,8 @@
 <template>
+  <Youtubue 
+  videoId="WcA9cUP2FJ0"
+  width="100%"
+  />
   <Background />
   <Headline />
   <Clock />
@@ -7,6 +11,7 @@
     <Todoinput />
     <TodoList />
   </div>
+
 </template>
 
 <script>
@@ -17,6 +22,7 @@ import Login from '~/components/Login.vue'
 import Todoinput from '~/components/Todoinput.vue'
 import TodoList from '~/components/TodoList.vue'
 // import TodoController from '~/components/TodoController.vue'
+import Youtubue from '~/components/Youtube.vue'
 
 export default {
   components:{
@@ -27,7 +33,7 @@ export default {
     Todoinput:Todoinput,
     // TodoController:TodoController,
     TodoList:TodoList,
-
+    Youtubue:Youtubue,
   },
 }
 </script>

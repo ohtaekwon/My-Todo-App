@@ -36,7 +36,7 @@ export default {
   background-repeat: no-repeat;
   background-position: center;
   z-index:-9;
-  filter: brightness(30%);
+  filter: brightness(20%);
   }
 }
 </style>
